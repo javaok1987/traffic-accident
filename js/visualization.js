@@ -36,7 +36,8 @@ var hourArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "
     "22", "23"
 ];
 
-d3.json("./data/accident102.json", function(err, json) {
+d3.json("./data/accident102.json", function(err, json) { //./data/accident102.json
+
     var width = 350,
         height = 200;
     var accidentData = [];
@@ -52,7 +53,7 @@ d3.json("./data/accident102.json", function(err, json) {
     ndx = crossfilter(json);
     all = ndx.groupAll();
     updateAccidentMap(accidentData);
-    $("#accidentTotal").val("事故: "+  accidentData.length + " 筆。");
+    $("#accidentTotal").val("事故: " + accidentData.length + " 筆。");
 
     //定義barchart or piechart
     monthByBarChart = dc.barChart("#month_barChart");
@@ -297,11 +298,11 @@ d3.json("./data/accident102.json", function(err, json) {
     drunkPieChart = dc.pieChart("#drunkPieChart");
     drunkDim = ndx.dimension(function(d) {
         if (d.drunk === "1" || d.drunk === "2") {
-            d.drive = "飲酒";
+            d.drive = "未飲酒";
         } else if (d.drunk === "9" || d.drunk === "10" || d.drunk === "11") {
             d.drive = "不明";
         } else {
-            d.drive = "未飲酒";
+            d.drive = "飲酒";
         }
         return d.drive;
     });
@@ -336,11 +337,20 @@ d3.json("./data/accident102.json", function(err, json) {
 
     dc.renderAll();
 
-    //事件更新
-    function updateGraph(c, f) {
-        d3.selectAll(".m").style("display", "none");
-        d3.selectAll(".m").data(monthDayDim.top(Infinity)).style("display", "inline");
-        updateAccidentMap(monthDayDim.top(Infinity));
-        $("#accidentTotal").val("事故: "+  all.value() + " 筆。");
-    };
+    $("#chart-panel").unblock(); 
+
+
 })
+
+/**
+ * 事件更新
+ * @param  {[type]} c [description]
+ * @param  {[type]} f [description]
+ * @return {[type]}   [description]
+ */
+function updateGraph(c, f) {
+    d3.selectAll(".m").style("display", "none");
+    d3.selectAll(".m").data(monthDayDim.top(Infinity)).style("display", "inline");
+    updateAccidentMap(monthDayDim.top(Infinity));
+    $("#accidentTotal").val("事故: " + all.value() + " 筆。");
+};

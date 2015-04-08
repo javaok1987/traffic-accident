@@ -1,8 +1,11 @@
 var gmap = {
-    map: {}
+    map: {},
+
 }
 
 jQuery(function($) {
+
+
 
     google.maps.event.addDomListener(window, "load", function() {
         var mapOptions = {
@@ -15,7 +18,7 @@ jQuery(function($) {
             scaleControl: false,
             streetViewControl: false,
             overviewMapControl: false,
-			maxZoom:16,
+            maxZoom: 16,
             zoomControl: true,
             zoomControlOptions: {
                 style: google.maps.ZoomControlStyle.SMALL,
@@ -26,6 +29,16 @@ jQuery(function($) {
         };
         gmap.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         resizePanel();
+        $("#chart-panel").block({
+            overlayCSS: {
+                backgroundColor: "#ffffff",
+                opacity: .5
+            },
+            css: {
+                border: "0px"
+            },
+            message: "資料載入中<br><img src='./img/preloader-w8-cycle-black.gif'/>"
+        });
         gmap.map.mapTypes.set("map_style", new google.maps.StyledMapType([{
             "stylers": [{
                 "hue": "#dd0d0d"
@@ -46,7 +59,7 @@ jQuery(function($) {
             }]
         }]));
         gmap.map.setMapTypeId("map_style");
-		google.maps.event.addListener(gmap.map, 'zoom_changed', function() {
+        google.maps.event.addListener(gmap.map, 'zoom_changed', function() {
             heatmap.setOptions({
                 radius: getNewRadius()
             });
@@ -130,7 +143,7 @@ function getNewRadius() {
         var pixelsPerMeter = (Math.abs(initPoint.x - endPoint.x)) / 10000.0;
         var totalPixelSize = Math.floor(DESIRE_RADIUS_METER * pixelsPerMeter);
         return totalPixelSize;
-}
+    }
     //Mercator --BEGIN--
 function bound(value, opt_min, opt_max) {
     if (opt_min !== null) value = Math.max(value, opt_min);
