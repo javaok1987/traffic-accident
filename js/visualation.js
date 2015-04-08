@@ -36,7 +36,7 @@ var hourArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "
     "22", "23"
 ];
 
-d3.json("https://dl.dropboxusercontent.com/u/26467764/TrafficAcciden/data/accident102.json", function(err, json) { //./data/accident102.json
+d3.json("./data/accident102.json", function(err, json) {
     var width = 350,
         height = 200;
     var accidentData = [];
