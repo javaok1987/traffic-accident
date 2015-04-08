@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北市(A2)交通事故熱點與數據</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <!-- Loading Bootstrap -->
+    <!-- <link href="./css/vendor/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Loading Flat UI -->
+    <link href="./css/flat-ui.min.css" rel="stylesheet">
+    <!-- Loading dc.js -->
+    <link href="./css/dc.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <div class="float-left" id="map-panel">
+        <div id="map-canvas"></div>
+    </div>
+    <div class="float-left" id="chart-panel">
+        <h3>台北市(A2)交通事故熱點與數據</h3>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="0"> 事故時間 (月)
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="1"> 事故時間 (週)
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="2"> 事故時間 (時)
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="3"> 道路類別
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="4"> 年齡
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="5"> 當事者區分(第一當事人)
+            </label>
+        </div>
+        <div class="box display-inline">
+            <label class="checkbox">
+                <input type="checkbox" checked value="6"> 飲酒情形
+            </label>
+        </div>
+        <br>
+        <div class="box2 display-inline" id="month_barChart">
+            <strong>事故時間 (月)</strong>
+            <a class="reset" href="javascript:monthByBarChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="weekday_barChart">
+            <strong>事故時間(週)</strong>
+            <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="hour_barChart">
+            <strong>事故時間(時)</strong>
+            <a class="reset" href="javascript:hourByBarChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="roadCategoryPieChart">
+            <strong>道路類別</strong>
+            <a class="reset" href="javascript:roadCategoryPieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="agePieChart">
+            <strong>年齡</strong>
+            <a class="reset" href="javascript:agePieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="carTypePieChart">
+            <strong>當事者區分(第一當事人)</strong>
+            <a class="reset" href="javascript:carTypePieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box2 display-inline" id="drunkPieChart">
+            <strong>飲酒情形</strong>
+            <a class="reset" href="javascript:drunkPieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="footer"><small>資料來源：交通部<br>資料時間及區域：102年, A1(全台), A2(台北市)</small>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="./js/flat-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.js"></script>
+    <script src="./js/dc.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/visualation.js"></script>
+</body>
+
+</html>

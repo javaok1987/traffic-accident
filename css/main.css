@@ -1,0 +1,56 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+    font-family: font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+}
+.clearfix {
+    overflow: auto;
+}
+#map-canvas {
+    height: 100%;
+    width: 100%;
+}
+.float-left {
+    float: left;
+}
+.handler_vertical {
+    background: url(../img/handle-v.png) 3px 50% no-repeat;
+    width: 9px;
+    background-color: rgb(246, 246, 246);
+    border: 1px solid silver;
+    float: left;
+}
+#chart-panel {
+    padding: 1em;
+    height: 100%;
+    overflow: auto;
+}
+#map-panel {
+    height: 100%;
+    width: 60%;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 25px;
+    text-align: right;
+}
+.box {
+    width: 150px;
+    vertical-align: top;
+}
+.box2 {
+    width: 400px;
+    height: 250px;
+    /*border: 1px solid silver;*/
+}
+.display-inline {
+    display: inline-block;
+}
