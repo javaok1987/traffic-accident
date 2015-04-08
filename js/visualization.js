@@ -52,6 +52,7 @@ d3.json("./data/accident102.json", function(err, json) {
     ndx = crossfilter(json);
     all = ndx.groupAll();
     updateAccidentMap(accidentData);
+    $("#accidentTotal").val("事故: "+  accidentData.length + " 筆。");
 
     //定義barchart or piechart
     monthByBarChart = dc.barChart("#month_barChart");
@@ -340,5 +341,6 @@ d3.json("./data/accident102.json", function(err, json) {
         d3.selectAll(".m").style("display", "none");
         d3.selectAll(".m").data(monthDayDim.top(Infinity)).style("display", "inline");
         updateAccidentMap(monthDayDim.top(Infinity));
+        $("#accidentTotal").val("事故: "+  all.value() + " 筆。");
     };
 })
