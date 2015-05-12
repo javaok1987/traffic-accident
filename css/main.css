@@ -30,6 +30,7 @@ html, body {
     padding: 1em;
     height: 100%;
     overflow: auto;
+    padding-bottom: 3em;
 }
 #map-panel {
     height: 100%;
@@ -40,6 +41,9 @@ html, body {
     bottom: 0;
     right: 25px;
     text-align: right;
+    background-image: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.3em;
 }
 .box {
     width: 150px;
