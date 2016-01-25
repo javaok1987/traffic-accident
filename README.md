@@ -1,4 +1,4 @@
-# TrafficAccident
+# Traffic Accident
 
 
 **Google Maps JavaScript API - Heatmap**
