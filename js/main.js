@@ -121,7 +121,7 @@ function addHeatMapLayer() {
     ];
     heatmap = new google.maps.visualization.HeatmapLayer({
         data: pointMVCArray,
-        radius: getNewRadius(),
+        radius: 15,//getNewRadius(),
         dissipating: true,
     });
     heatmap.setMap(gmap.map);
