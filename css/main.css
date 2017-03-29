@@ -3,22 +3,27 @@ html, body {
     padding: 0;
     height: 100%;
 }
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     font-family: Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
 }
+
 .clearfix {
     overflow: auto;
 }
+
 #map-canvas {
     height: 100%;
     width: 100%;
 }
+
 .float-left {
     float: left;
 }
+
 .handler_vertical {
     background: url(../img/handle-v.png) 3px 50% no-repeat;
     width: 9px;
@@ -26,34 +31,52 @@ html, body {
     border: 1px solid silver;
     float: left;
 }
+
 #chart-panel {
     padding: 1em;
     height: 100%;
     overflow: auto;
     padding-bottom: 3em;
 }
+
+#chart-panel>h1 {
+    border-bottom: 4px solid;
+    width: 275px;
+}
+
 #map-panel {
     height: 100%;
-    width: 60%;
+    width: 65%;
 }
-.footer {
-    position: fixed;
-    bottom: 0;
-    right: 25px;
+
+#accidentTotal {
+    font-size: 14px;
+}
+
+.accident-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     text-align: right;
     background-image: none;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 0.3em;
+    border-radius: 6px;
+    padding-top: .5em;
+    padding-left: .5em;
 }
+
 .box {
-    width: 150px;
-    vertical-align: top;
+    width: 120px;
+    text-align: left;
 }
+
 .box2 {
     width: 400px;
-    height: 250px;
+    padding: 1em;
+    /*height: 250px;*/
     /*border: 1px solid silver;*/
 }
+
 .display-inline {
     display: inline-block;
 }

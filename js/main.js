@@ -1,11 +1,8 @@
 var gmap = {
-    map: {},
-
+    map: {}
 }
 
 jQuery(function($) {
-
-
 
     google.maps.event.addDomListener(window, "load", function() {
         var mapOptions = {
@@ -13,19 +10,10 @@ jQuery(function($) {
             mapTypeControlOptions: {
                 mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE]
             },
-            panControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            overviewMapControl: false,
+            disableDefaultUI: false,
+            minZoom: 12,
             maxZoom: 16,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL,
-                position: google.maps.ControlPosition.RIGHT_CENTER
-            },
-            panControl: false,
-            center: new google.maps.LatLng(25.0372264, 121.506378) //全台23.714059, 120.832002
+            center: new google.maps.LatLng(25.057910, 121.537963) //全台23.714059, 120.832002
         };
         gmap.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         resizePanel();
@@ -71,6 +59,7 @@ jQuery(function($) {
 
     $("#map-panel").resizable({
         handles: "e",
+        maxWidth: $("#map-panel").width(),
         stop: function(event, ui) {
             // resizePanel();
             // google.maps.event.trigger(gmap.map, "resize");
@@ -121,30 +110,31 @@ function addHeatMapLayer() {
     ];
     heatmap = new google.maps.visualization.HeatmapLayer({
         data: pointMVCArray,
-        radius: 15,//getNewRadius(),
+        radius: getNewRadius(),
         dissipating: true,
     });
     heatmap.setMap(gmap.map);
 };
 
 function getNewRadius() {
-        var numTiles = 1 << gmap.map.getZoom();
-        var center = gmap.map.getCenter();
-        var moved = google.maps.geometry.spherical.computeOffset(center, 10000, 90); /*1000 meters to the right*/
-        var projection = new MercatorProjection();
-        var initCoord = projection.fromLatLngToPoint(center);
-        var endCoord = projection.fromLatLngToPoint(moved);
-        var initPoint = new google.maps.Point(
-            initCoord.x * numTiles,
-            initCoord.y * numTiles);
-        var endPoint = new google.maps.Point(
-            endCoord.x * numTiles,
-            endCoord.y * numTiles);
-        var pixelsPerMeter = (Math.abs(initPoint.x - endPoint.x)) / 10000.0;
-        var totalPixelSize = Math.floor(DESIRE_RADIUS_METER * pixelsPerMeter);
-        return totalPixelSize;
-    }
-    //Mercator --BEGIN--
+    var numTiles = Math.pow(2, gmap.map.getZoom());
+    var center = gmap.map.getCenter();
+    var moved = google.maps.geometry.spherical.computeOffset(center, 10000, 90); /*1000 meters to the right*/
+    var projection = new MercatorProjection();
+    var initCoord = projection.fromLatLngToPoint(center);
+    var endCoord = projection.fromLatLngToPoint(moved);
+    var initPoint = new google.maps.Point(
+        initCoord.x * numTiles,
+        initCoord.y * numTiles);
+    var endPoint = new google.maps.Point(
+        endCoord.x * numTiles,
+        endCoord.y * numTiles);
+    var pixelsPerMeter = (Math.abs(initPoint.x - endPoint.x)) / 10000.0;
+    var totalPixelSize = Math.floor(DESIRE_RADIUS_METER * pixelsPerMeter);
+    return totalPixelSize;
+}
+
+//Mercator --BEGIN--
 function bound(value, opt_min, opt_max) {
     if (opt_min !== null) value = Math.max(value, opt_min);
     if (opt_max !== null) value = Math.min(value, opt_max);
