@@ -128,7 +128,7 @@ function addHeatMapLayer() {
 };
 
 function getNewRadius() {
-        var numTiles = gmap.map.getZoom();
+        var numTiles = 1 << gmap.map.getZoom();
         var center = gmap.map.getCenter();
         var moved = google.maps.geometry.spherical.computeOffset(center, 10000, 90); /*1000 meters to the right*/
         var projection = new MercatorProjection();
