@@ -2,90 +2,88 @@ var gmap = {
     map: {}
 }
 
-jQuery(function($) {
+var TILE_SIZE = 256;
+var DESIRE_RADIUS_METER = 400;
+var pointMVCArray = new google.maps.MVCArray();
 
-    google.maps.event.addDomListener(window, "load", function() {
-        var mapOptions = {
-            zoom: 12,
-            mapTypeControlOptions: {
-                mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE]
-            },
-            disableDefaultUI: false,
-            minZoom: 12,
-            maxZoom: 16,
-            center: new google.maps.LatLng(25.057910, 121.537963) //全台23.714059, 120.832002
-        };
-        gmap.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-        resizePanel();
-        $("#chart-panel").block({
-            overlayCSS: {
-                backgroundColor: "#ffffff",
-                opacity: .5
-            },
-            css: {
-                border: "0px"
-            },
-            message: "資料載入中<br><img src='./img/preloader-w8-cycle-black.gif'/>"
-        });
-        gmap.map.mapTypes.set("map_style", new google.maps.StyledMapType([{
-            "stylers": [{
-                "hue": "#dd0d0d"
-            }]
+google.maps.event.addDomListener(window, "load", function() {
+    var mapOptions = {
+        zoom: 12,
+        mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE]
+        },
+        disableDefaultUI: false,
+        minZoom: 12,
+        maxZoom: 16,
+        center: new google.maps.LatLng(25.057910, 121.537963) //全台23.714059, 120.832002
+    };
+    gmap.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    resizePanel();
+    $("#chart-panel").block({
+        overlayCSS: {
+            backgroundColor: "#ffffff",
+            opacity: .5
+        },
+        css: {
+            border: "0px"
+        },
+        message: "資料載入中<br><img src='./img/preloader-w8-cycle-black.gif'/>"
+    });
+    gmap.map.mapTypes.set("map_style", new google.maps.StyledMapType([{
+        "stylers": [{
+            "hue": "#dd0d0d"
+        }]
+    }, {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }, {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{
+            "lightness": 100
         }, {
-            "featureType": "road",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [{
-                "lightness": 100
-            }, {
-                "visibility": "simplified"
-            }]
-        }]));
-        gmap.map.setMapTypeId("map_style");
-        google.maps.event.addListener(gmap.map, 'zoom_changed', function() {
-            heatmap.setOptions({
-                radius: getNewRadius()
-            });
+            "visibility": "simplified"
+        }]
+    }]));
+    gmap.map.setMapTypeId("map_style");
+    google.maps.event.addListener(gmap.map, 'zoom_changed', function() {
+        heatmap.setOptions({
+            radius: getNewRadius()
         });
     });
-
-
-    $('input[type="checkbox"]').radiocheck();
-
-    $("#map-panel").resizable({
-        handles: "e",
-        maxWidth: $("#map-panel").width(),
-        stop: function(event, ui) {
-            // resizePanel();
-            // google.maps.event.trigger(gmap.map, "resize");
-        }
-    });
-    $(".ui-resizable-handle").addClass("handler_vertical")
-
-    $(window).resize(function() {
-        resizePanel();
-        google.maps.event.trigger(gmap.map, "resize");
-    });
-
-    $('input[type="checkbox"]').on("click", function() {
-        $($(".box2")[$(this).val()]).toggle();
-    })
-
 });
+
+
+$('input[type="checkbox"]').radiocheck();
+
+$("#map-panel").resizable({
+    handles: "e",
+    maxWidth: $("#map-panel").width(),
+    stop: function(event, ui) {
+        // resizePanel();
+        // google.maps.event.trigger(gmap.map, "resize");
+    }
+});
+$(".ui-resizable-handle").addClass("handler_vertical")
+
+$(window).resize(function() {
+    resizePanel();
+    google.maps.event.trigger(gmap.map, "resize");
+});
+
+$('input[type="checkbox"]').on("click", function() {
+    $($(".box2")[$(this).val()]).toggle();
+})
+
 
 function resizePanel() {
     $("#map-panel").height("100%");
     $("#chart-panel").width($(window).width() - ($("#map-panel").width() + $(".handler_vertical").width() + 30));
 }
 
-var TILE_SIZE = 256;
-var DESIRE_RADIUS_METER = 400;
-var pointMVCArray = new google.maps.MVCArray();
 
 function updateAccidentMap(data) {
     if (!pointMVCArray) {
@@ -118,6 +116,7 @@ function addHeatMapLayer() {
 
 function getNewRadius() {
     var numTiles = Math.pow(2, gmap.map.getZoom());
+    // var numTiles = 1<<gmap.map.getZoom();
     var center = gmap.map.getCenter();
     var moved = google.maps.geometry.spherical.computeOffset(center, 10000, 90); /*1000 meters to the right*/
     var projection = new MercatorProjection();
