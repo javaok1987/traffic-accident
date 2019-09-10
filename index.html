@@ -21,7 +21,9 @@
     <![endif]-->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDKefBO8elLL_dzNOd94xHk93vd0IFAes8&libraries=visualization,geometry" async defer></script>
+    <script
+        src="//maps.googleapis.com/maps/api/js?key=AIzaSyDKefBO8elLL_dzNOd94xHk93vd0IFAes8&libraries=visualization,geometry"
+        async defer></script>
     <script src="//code.jquery.com/jquery.min.js"></script>
 </head>
 
@@ -32,38 +34,38 @@
         <div class="accident-info">
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="0"> 事故時間 (月)
-              </label>
+                    <input type="checkbox" checked value="0"> 事故時間 (月)
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="1"> 事故時間 (週)
-              </label>
+                    <input type="checkbox" checked value="1"> 事故時間 (週)
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="2"> 事故時間 (時)
-              </label>
+                    <input type="checkbox" checked value="2"> 事故時間 (時)
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="3"> 道路類別
-              </label>
+                    <input type="checkbox" checked value="3"> 道路類別
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="4"> 年齡
-              </label>
+                    <input type="checkbox" checked value="4"> 年齡
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="5"> 當事者區分<br/>(第一當事人)
-              </label>
+                    <input type="checkbox" checked value="5"> 當事者區分<br />(第一當事人)
+                </label>
             </div>
             <div class="box">
                 <label class="checkbox">
-                  <input type="checkbox" checked value="6"> 飲酒情形
-              </label>
+                    <input type="checkbox" checked value="6"> 飲酒情形
+                </label>
             </div>
             <div class="box">
                 <p id="accidentTotal"> </p>
@@ -74,22 +76,26 @@
         <h1>Traffic Accident</h1>
         <div class="box2 display-inline" id="month_barChart">
             <strong>事故時間 (月)</strong>
-            <a class="reset" href="javascript:monthByBarChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:monthByBarChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline" id="weekday_barChart">
             <strong>事故時間(週)</strong>
-            <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline" id="hour_barChart">
             <strong>事故時間(時)</strong>
-            <a class="reset" href="javascript:hourByBarChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:hourByBarChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline" id="roadCategoryPieChart">
             <strong>道路類別</strong>
-            <a class="reset" href="javascript:roadCategoryPieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:roadCategoryPieChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline" id="agePieChart">
@@ -99,19 +105,19 @@
         </div>
         <div class="box2 display-inline" id="carTypePieChart">
             <strong>當事者區分(第一當事人)</strong>
-            <a class="reset" href="javascript:carTypePieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:carTypePieChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline" id="drunkPieChart">
             <strong>飲酒情形</strong>
-            <a class="reset" href="javascript:drunkPieChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+            <a class="reset" href="javascript:drunkPieChart.filterAll();dc.redrawAll();"
+                style="display: none;">reset</a>
             <div class="clearfix"></div>
         </div>
         <div class="box2 display-inline"><small>資料來源及時間：交通部, 102年</small></div>
     </div>
 
-    </div>
-    </div>
     <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="./js/flat-ui.min.js"></script>
@@ -122,9 +128,9 @@
     <script src="./js/main.js"></script>
     <script src="./js/visualization.js"></script>
     <script>
-        (function(i, s, o, g, r, a, m) {
+        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
+            i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date();
             a = s.createElement(o),
